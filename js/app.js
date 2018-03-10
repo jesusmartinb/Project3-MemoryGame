@@ -89,16 +89,27 @@ for(let i = 0; i < gameCards.length; i++){
     const iconfa = gameCards[i].innerHTML;
     listOfOpenCards(iconfa);
 
+    /*
+        *  - if the list already has another card, check to see if the two cards match
+        *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+    */
 
+    if(openCards.length > 1 && openCards[0] === openCards[1]){
+      console.log("Match");
+      for(let i = 0; i < gameCards.length; i++){
+        if(gameCards[i].classList.contains("open")){
+          gameCards[i].classList.remove("open", "show");
+          gameCards[i].classList.add("match");
+          openCards = [];
+        }
+      }
+    }
 
   });
 }
 
 
-/*
-    *  - if the list already has another card, check to see if the two cards match
-    *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-*/
+
 
 
 /*
