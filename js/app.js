@@ -105,6 +105,18 @@ for(let i = 0; i < gameCards.length; i++){
       }
     }
 
+/*
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+*/
+    if(openCards.length > 1 && openCards[0] !== openCards[1]){
+      console.log("Do not Match");
+      openCards = [];
+      for(let i = 0; i < gameCards.length; i++){
+        if(gameCards[i].classList.contains("open")){
+          const time = setTimeout(function removeCards(){gameCards[i].classList.remove("open", "show")}, 1000);
+        }
+      }
+    }
   });
 }
 
@@ -112,9 +124,7 @@ for(let i = 0; i < gameCards.length; i++){
 
 
 
-/*
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-*/
+
 
  /*
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
