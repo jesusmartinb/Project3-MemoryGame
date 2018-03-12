@@ -110,6 +110,16 @@ function listOfOpenCards(iconfa){
   return openCards;
 };
 
+/*
+*    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+*/
+let counter = 0;
+function moveCounter(){
+  counter += 1;
+  const moves = document.querySelector('.moves');
+  moves.innerText = counter;
+};
+
 newGame(cards);
 
 /*
@@ -128,8 +138,11 @@ for(let i = 0; i < gameCards.length; i++){
     noMatch(openCards);
 
 
-
   });
+
+
+  gameCards[i].addEventListener('click', moveCounter);
+
 }
 
 
@@ -138,7 +151,8 @@ for(let i = 0; i < gameCards.length; i++){
 
 
 
- /*
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+
+
+/*
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
