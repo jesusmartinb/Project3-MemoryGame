@@ -61,13 +61,47 @@ function newGame(cards){
   return deck.innerHTML = playingCards;
 }
 
-newGame(cards);
+/*
+    *  - if the list already has another card, check to see if the two cards match
+    *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+*/
+function match(openCards){
+  if(openCards.length > 1 && openCards[0] === openCards[1]){
+    console.log("Match");
+    for(let i = 0; i < gameCards.length; i++){
+      if(gameCards[i].classList.contains("open")){
+        gameCards[i].classList.remove("open", "show");
+        gameCards[i].classList.add("match");
+      }
+    }
+  }
+}
+
+/*
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+*/
+function noMatch(openCards){
+  if(openCards.length > 1 && openCards[0] !== openCards[1]){
+    console.log("Do not Match");
+    openCards = [];
+    for(let i = 0; i < gameCards.length; i++){
+      if(gameCards[i].classList.contains("open")){
+        const time = setTimeout(function removeCards(){gameCards[i].classList.remove("open", "show")}, 1000);
+      }
+    }
+  }
+}
+
+/*
 
 /*
 *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 */
 let openCards = [];
 function listOfOpenCards(iconfa){
+  if(openCards.length === 2){
+    openCards = [];
+  }
   console.log(iconfa);
   icon = iconfa.slice(13, -6);
   console.log(icon);
@@ -75,6 +109,8 @@ function listOfOpenCards(iconfa){
   console.log(openCards);
   return openCards;
 };
+
+newGame(cards);
 
 /*
  *  *********** set up the event listener for a card. If a card is clicked: ******************
@@ -88,35 +124,11 @@ for(let i = 0; i < gameCards.length; i++){
     gameCards[i].classList.add("open", "show");
     const iconfa = gameCards[i].innerHTML;
     listOfOpenCards(iconfa);
+    match(openCards);
+    noMatch(openCards);
 
-    /*
-        *  - if the list already has another card, check to see if the two cards match
-        *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-    */
 
-    if(openCards.length > 1 && openCards[0] === openCards[1]){
-      console.log("Match");
-      for(let i = 0; i < gameCards.length; i++){
-        if(gameCards[i].classList.contains("open")){
-          gameCards[i].classList.remove("open", "show");
-          gameCards[i].classList.add("match");
-          openCards = [];
-        }
-      }
-    }
 
-/*
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-*/
-    if(openCards.length > 1 && openCards[0] !== openCards[1]){
-      console.log("Do not Match");
-      openCards = [];
-      for(let i = 0; i < gameCards.length; i++){
-        if(gameCards[i].classList.contains("open")){
-          const time = setTimeout(function removeCards(){gameCards[i].classList.remove("open", "show")}, 1000);
-        }
-      }
-    }
   });
 }
 
