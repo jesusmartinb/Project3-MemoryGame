@@ -14,11 +14,55 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 
 body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
+}
+
+/*
+* Styles for the modal Won
+*/
+
+.modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 200px;
+    background: #ffffff url('../img/geometry2.png');
+    text-align: center;
+}
+
+.modal ul {
+    list-style-type: none;
+}
+
+.modal .fa {
+    color: #0f0;
+}
+
+.modal p a {
+    display: inline-block;
+    background-color: #02b3e4;
+    border-radius: 6px;
+    color: #f9fafb;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 1rem;
+    text-decoration: none;
+}
+
+.modal p a:hover {
+  background-color: #f9fafb;
+  color: #02b3e4;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 .container {
