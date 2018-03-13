@@ -163,11 +163,15 @@ function finalMessage(){
       move.innerText = counter;
       const star = document.getElementById('stars');
       star.innerText = stars;
-
-
     }, 1000);
   }
 };
+
+
+
+function reloaded(){
+  window.location.reload(true);
+}
 
 newGame(cards);
 
@@ -193,9 +197,10 @@ for(let i = 0; i < gameCards.length; i++){
 
   gameCards[i].addEventListener('click', moveCounter);
 
-
-
 }
 
 const reload = document.querySelector('.restart');
-reload.addEventListener('click', newGame);
+reload.addEventListener('click', reloaded);
+
+const play = document.getElementById('playAgain');
+play.addEventListener('click', reloaded);
