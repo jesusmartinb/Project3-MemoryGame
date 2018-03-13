@@ -65,8 +65,10 @@ function newGame(cards){
     *  - if the list already has another card, check to see if the two cards match
     *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
 */
+let matches = 0;
 function match(openCards){
   if(openCards.length > 1 && openCards[0] === openCards[1]){
+    matches += 1;
     console.log("Match");
     for(let i = 0; i < gameCards.length; i++){
       if(gameCards[i].classList.contains("open")){
@@ -75,6 +77,7 @@ function match(openCards){
       }
     }
   }
+  return matches;
 }
 
 /*
@@ -118,9 +121,56 @@ function moveCounter(){
   counter += 1;
   const moves = document.querySelector('.moves');
   moves.innerText = counter;
+  return counter;
+};
+
+let stars = 3;
+function showStarts(counter){
+  if(counter === 16){
+    const thirdStar = document.getElementById('third-star');
+    thirdStar.classList.remove("fa-star");
+    thirdStar.classList.add("fa-star-o");
+    stars -= 1;
+  }
+  if(counter === 24){
+    const secondStar = document.getElementById('second-star');
+    secondStar.classList.remove("fa-star");
+    secondStar.classList.add("fa-star-o");
+    stars -= 1;
+  }
+  if(counter === 32){
+    const firstStar = document.getElementById('first-star');
+    firstStar.classList.remove("fa-star");
+    firstStar.classList.add("fa-star-o");
+    stars -= 1;
+  }
+
+  console.log(stars);
+  return stars;
+}
+
+/*
+ *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ */
+
+function finalMessage(){
+  if(matches === 8){
+
+    const message = setTimeout(function(){
+      const modal = document.getElementById('modal');
+      modal.classList.remove("hidden");
+      const move = document.getElementById('moves');
+      move.innerText = counter;
+      const star = document.getElementById('stars');
+      star.innerText = stars;
+
+
+    }, 1000);
+  }
 };
 
 newGame(cards);
+
 
 /*
  *  *********** set up the event listener for a card. If a card is clicked: ******************
@@ -136,23 +186,16 @@ for(let i = 0; i < gameCards.length; i++){
     listOfOpenCards(iconfa);
     match(openCards);
     noMatch(openCards);
-
+    showStarts(counter);
+    finalMessage();
 
   });
 
-
   gameCards[i].addEventListener('click', moveCounter);
+
+
 
 }
 
-
-
-
-
-
-
-
-
-/*
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+const reload = document.querySelector('.restart');
+reload.addEventListener('click', newGame);
