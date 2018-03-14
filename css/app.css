@@ -82,7 +82,7 @@ h1 {
  */
 
 .deck {
-    width: 660px;
+    max-width: 660px;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
@@ -198,4 +198,84 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+
+/******************************************/
+/*******       Media Queries    ***********/
+/******************************************/
+
+@media screen and (max-width: 712px){
+  .deck {
+      max-width: 560px;
+      min-height: 580px;
+  }
+
+  .deck .card {
+      height: 100px;
+      width: 100px;
+  }
+}
+
+@media screen and (max-width: 590px){
+  .deck {
+      max-width: 400px;
+      min-height: 420px;
+  }
+
+  .deck .card {
+      height: 75px;
+      width: 75px;
+  }
+
+  .deck .card.show {
+      font-size: 26px;
+  }
+
+  .deck .card.match {
+      font-size: 26px;
+  }
+
+  .deck .card.nomatch {
+      font-size: 26px;
+  }
+
+
+}
+
+@media screen and (max-width: 430px){
+  .deck {
+      max-width: 300px;
+      min-height: 320px;
+  }
+
+  .deck .card {
+      height: 50px;
+      width: 50px;
+  }
+}
+
+@media screen and (max-width: 320px){
+  .deck {
+      max-width: 260px;
+      min-height: 280px;
+  }
+
+  .deck .card {
+      height: 40px;
+      width: 40px;
+  }
+
+  .deck .card.show {
+      font-size: 18px;
+  }
+
+  .deck .card.match {
+      font-size: 18px;
+  }
+
+  .deck .card.nomatch {
+      font-size: 18px;
+  }
+
 }
