@@ -89,7 +89,8 @@ function noMatch(openCards){
     openCards = [];
     for(let i = 0; i < gameCards.length; i++){
       if(gameCards[i].classList.contains("open")){
-        const time = setTimeout(function removeCards(){gameCards[i].classList.remove("open", "show")}, 1000);
+        gameCards[i].classList.add("nomatch");
+        const time = setTimeout(function removeCards(){gameCards[i].classList.remove("open", "show", "nomatch")}, 1000);
       }
     }
   }
@@ -167,7 +168,9 @@ function finalMessage(){
   }
 };
 
-
+/*
+* restart the game  and play again.
+*/
 
 function reloaded(){
   window.location.reload(true);
@@ -198,6 +201,7 @@ for(let i = 0; i < gameCards.length; i++){
   gameCards[i].addEventListener('click', moveCounter);
 
 }
+
 
 const reload = document.querySelector('.restart');
 reload.addEventListener('click', reloaded);

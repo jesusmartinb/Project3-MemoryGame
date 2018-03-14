@@ -107,22 +107,70 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+
 }
 
 .deck .card.open {
-    transform: rotateY(0);
+    transform: rotateY(180deg);
     background: #02b3e4;
     cursor: default;
+    transition: all 0.3s ease;
 }
 
 .deck .card.show {
     font-size: 33px;
 }
 
+@keyframes match {
+  0% {
+    transform: scale(1.0, 1.0);
+  }
+  25% {
+    transform: scale(1.2, 1.0);
+  }
+  50% {
+    transform: scale(1.0, 1.0);
+  }
+  75% {
+    transform: scale(1.0, 1.2);
+  }
+  100% {
+    transform: scale(1.0, 1.0);
+  }
+}
+
 .deck .card.match {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    /*transition: all 0.3s ease;*/
+    animation: match 0.4s ease;
+}
+
+@keyframes nomatch {
+  0% {
+    transform: skew(0deg,0deg);
+  }
+  25% {
+    transform: skew(12deg,12deg);
+  }
+  50% {
+    transform: skew(0deg,0deg);
+  }
+  75% {
+    transform: skew(-12deg,-12deg);
+  }
+  100% {
+    transform: skew(0deg,0deg);
+  }
+}
+
+
+.deck .card.nomatch {
+    cursor:default;
+    background: #aa7ecd;
+    font-size: 33px;
+    animation: nomatch 0.4s ease;
 }
 
 /*
