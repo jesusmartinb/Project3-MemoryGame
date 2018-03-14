@@ -3,22 +3,22 @@
  */
 
 const cards = [
-  'fa-diamond',
-  'fa-paper-plane-o',
-  'fa-anchor',
-  'fa-bolt',
-  'fa-cube',
-  'fa-anchor',
-  'fa-leaf',
-  'fa-bicycle',
-  'fa-diamond',
-  'fa-bomb',
-  'fa-leaf',
-  'fa-bomb',
-  'fa-bolt',
-  'fa-bicycle',
-  'fa-paper-plane-o',
-  'fa-cube'
+  'fa-pencil',
+  'fa-folder-open-o',
+  'fa-calendar',
+  'fa-balance-scale',
+  'fa-heartbeat',
+  'fa-calendar',
+  'fa-signal',
+  'fa-university',
+  'fa-pencil',
+  'fa-pie-chart',
+  'fa-signal',
+  'fa-pie-chart',
+  'fa-balance-scale',
+  'fa-university',
+  'fa-folder-open-o',
+  'fa-heartbeat'
 ];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -133,13 +133,13 @@ function showStarts(counter){
     thirdStar.classList.add("fa-star-o");
     stars -= 1;
   }
-  if(counter === 24){
+  if(counter === 26){
     const secondStar = document.getElementById('second-star');
     secondStar.classList.remove("fa-star");
     secondStar.classList.add("fa-star-o");
     stars -= 1;
   }
-  if(counter === 32){
+  if(counter === 34){
     const firstStar = document.getElementById('first-star');
     firstStar.classList.remove("fa-star");
     firstStar.classList.add("fa-star-o");
