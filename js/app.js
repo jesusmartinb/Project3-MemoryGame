@@ -42,7 +42,7 @@ function newGame(cards){
    *   - shuffle the list of cards using the provided "shuffle" method below
   */
   shuffle(cards);
-  console.log(cards);
+
    /*
    *   - loop through each card and create its HTML
   */
@@ -52,24 +52,55 @@ function newGame(cards){
     card = `<li class="card"><i class="fa ${cards[i]}"></i></li>`;
     playingCards += card;
   }
-  console.log(playingCards);
+
    /*
    *   - add each card's HTML to the page
    */
   const deck = document.getElementById('deck');
-  console.log(deck);
   return deck.innerHTML = playingCards;
 }
 
 /*
-    *  - if the list already has another card, check to see if the two cards match
-    *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+    * - implementation of the chronometer
+*/
+
+function startTime(){
+  let seconds = 0;
+  sec = document.getElementById('seconds');
+  min = document.getElementById('minutes');
+  let cronometer = setInterval(function(){
+    seconds++;
+
+    let secs = seconds;
+    let mins = 0;
+    while(secs >= 60){
+      mins++;
+      secs -= 60;
+    }
+
+    if(mins < 10){
+      min.innerHTML = `0${mins}`;
+    }else{
+      min.innerHTML = mins;
+    }
+
+    if(secs <10){
+      sec.innerHTML = `0${secs}`;
+    }else{
+      sec.innerHTML = secs;
+    }
+  }, 1000);
+}
+
+/*
+  *  - if the list already has another card, check to see if the two cards match
+  *    + if the cards do match, lock the cards in the open position (put this
+          functionality in another function that you call from this one)
 */
 let matches = 0;
 function match(openCards){
   if(openCards.length > 1 && openCards[0] === openCards[1]){
     matches += 1;
-    console.log("Match");
     for(let i = 0; i < gameCards.length; i++){
       if(gameCards[i].classList.contains("open")){
         gameCards[i].classList.remove("open", "show");
@@ -81,41 +112,42 @@ function match(openCards){
 }
 
 /*
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ *    + if the cards do not match, remove the cards from the list and hide the
+      card's symbol (put this functionality in another function that you call
+      from this one)
 */
 function noMatch(openCards){
   if(openCards.length > 1 && openCards[0] !== openCards[1]){
-    console.log("Do not Match");
     openCards = [];
     for(let i = 0; i < gameCards.length; i++){
       if(gameCards[i].classList.contains("open")){
         gameCards[i].classList.add("nomatch");
-        const time = setTimeout(function removeCards(){gameCards[i].classList.remove("open", "show", "nomatch")}, 1000);
+        const time = setTimeout(function removeCards(){
+          gameCards[i].classList.remove("open", "show", "nomatch")
+        }, 1000);
       }
     }
   }
 }
 
 /*
-
 /*
-*  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+*  - add the card to a *list* of "open" cards (put this functionality in another
+    function that you call from this one)
 */
 let openCards = [];
 function listOfOpenCards(iconfa){
   if(openCards.length === 2){
     openCards = [];
   }
-  console.log(iconfa);
   icon = iconfa.slice(13, -6);
-  console.log(icon);
   openCards.push(icon);
-  console.log(openCards);
   return openCards;
 };
 
 /*
-*    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+*    + increment the move counter and display it on the page (put this functionality
+      in another function that you call from this one)
 */
 let counter = 0;
 function moveCounter(){
@@ -145,18 +177,16 @@ function showStarts(counter){
     firstStar.classList.add("fa-star-o");
     stars -= 1;
   }
-
-  console.log(stars);
   return stars;
 }
 
 /*
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ *    + if all cards have matched, display a message with the final score (put
+      this functionality in another function that you call from this one)
  */
 
 function finalMessage(){
   if(matches === 8){
-
     const message = setTimeout(function(){
       const modal = document.getElementById('modal');
       modal.classList.remove("hidden");
@@ -164,7 +194,17 @@ function finalMessage(){
       move.innerText = counter;
       const star = document.getElementById('stars');
       star.innerText = stars;
-    }, 1000);
+
+      const minutes = document.getElementById('minutes');
+      timeMinutes = minutes.innerText;
+      const finalMinutes = document.getElementById('finalMinutes');
+      finalMinutes.innerText = timeMinutes;
+      const seconds = document.getElementById('seconds');
+      timeSeconds = seconds.innerText;
+      const finalSeconds = document.getElementById('finalSeconds');
+      finalSeconds.innerText = timeSeconds;
+
+    }, 600);
   }
 };
 
@@ -177,11 +217,12 @@ function reloaded(){
 }
 
 newGame(cards);
-
+startTime();
 
 /*
- *  *********** set up the event listener for a card. If a card is clicked: ******************
- *  - display the card's symbol (put this functionality in another function that you call from this one)
+ *  ****** set up the event listener for a card. If a card is clicked: ******
+ *  - display the card's symbol (put this functionality in another function
+      that you call from this one)
 */
 
 const gameCards = document.getElementsByClassName('card');
