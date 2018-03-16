@@ -156,25 +156,21 @@ function moveCounter(){
   moves.innerText = counter;
   return counter;
 };
-
+/*
+*   decrement the stars in function of move counter
+*/
 let stars = 3;
-function showStarts(counter){
-  if(counter === 16){
+function showStars(counter){
+  if(counter === 22){
     const thirdStar = document.getElementById('third-star');
     thirdStar.classList.remove("fa-star");
     thirdStar.classList.add("fa-star-o");
     stars -= 1;
   }
-  if(counter === 26){
+  if(counter === 32){
     const secondStar = document.getElementById('second-star');
     secondStar.classList.remove("fa-star");
     secondStar.classList.add("fa-star-o");
-    stars -= 1;
-  }
-  if(counter === 34){
-    const firstStar = document.getElementById('first-star');
-    firstStar.classList.remove("fa-star");
-    firstStar.classList.add("fa-star-o");
     stars -= 1;
   }
   return stars;
@@ -234,7 +230,7 @@ for(let i = 0; i < gameCards.length; i++){
     listOfOpenCards(iconfa);
     match(openCards);
     noMatch(openCards);
-    showStarts(counter);
+    showStars(counter);
     finalMessage();
 
   });
