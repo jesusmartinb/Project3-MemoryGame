@@ -1,7 +1,6 @@
-/*
- *  ************ Create a list that holds all of your cards ***********
+/**
+ * @description  Create a list or array that holds all of your cards
  */
-
 const cards = [
   'fa-pencil',
   'fa-folder-open-o',
@@ -21,7 +20,14 @@ const cards = [
   'fa-heartbeat'
 ];
 
+
+
+/**
 // Shuffle function from http://stackoverflow.com/a/2450976
+* @description shuffle the elements of an array
+* @param {array} cards - the cards of the gameCards
+* @return {array} cards - the cards suffle
+*/
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -36,16 +42,18 @@ function shuffle(array) {
     return array;
 }
 
+
+
+/**
+ * @description Display the cards on the page
+ * @param {array} cards - the cards of the gameCards
+ * @returns {HTML} playingCards - HTML of cards
+*/
 function newGame(cards){
-  /*
-   * ********* Display the cards on the page ****************
-   *   - shuffle the list of cards using the provided "shuffle" method below
-  */
+  // shuffle the list of cards using the provided "shuffle" method below
   shuffle(cards);
 
-   /*
-   *   - loop through each card and create its HTML
-  */
+  //loop through each card and create its HTML
   let card = "";
   let playingCards = "";
   for(let i = 0; i < cards.length; i++){
@@ -53,30 +61,35 @@ function newGame(cards){
     playingCards += card;
   }
 
-   /*
-   *   - add each card's HTML to the page
-   */
+  //add each card's HTML to the page
   const deck = document.getElementById('deck');
   return deck.innerHTML = playingCards;
 }
 
-/*
-    * - implementation of the chronometer
-*/
 
+
+/**
+* @description Implementation of the chronometer
+*/
 function startTime(){
   let seconds = 0;
   sec = document.getElementById('seconds');
   min = document.getElementById('minutes');
+
+  // every 1000ms adds a second
   let cronometer = setInterval(function(){
     seconds++;
 
+    // convert seconds into minutes and seconds
     let secs = seconds;
     let mins = 0;
     while(secs >= 60){
       mins++;
       secs -= 60;
     }
+
+    // if the minutes or seconds have a single figure put a zero in front and
+    // add the HTML to the page
 
     if(mins < 10){
       min.innerHTML = `0${mins}`;
@@ -89,18 +102,47 @@ function startTime(){
     }else{
       sec.innerHTML = secs;
     }
+
   }, 1000);
 }
 
-/*
-  *  - if the list already has another card, check to see if the two cards match
-  *    + if the cards do match, lock the cards in the open position (put this
-          functionality in another function that you call from this one)
+
+
+/**
+* @description add the click card to a list or array of "open" cards
+* @param {HTML} iconfa - HTML of icons
+* @returns {array} openCards - whith the strings of name icons
+*/
+let openCards = [];
+function listOfOpenCards(iconfa){
+
+  // if there are two icons yet in the array delete it
+  if(openCards.length === 2){
+    openCards = [];
+  }
+
+  // retrieves the name of the icon and adds it to the list
+  icon = iconfa.slice(13, -6);
+  openCards.push(icon);
+  return openCards;
+};
+
+
+
+/**
+* @description if the list openCards has two card, check to see if the two cards match
+* @param {array} openCards - list of recent open Cards
+* @return {number} matches - number of times a couple of cards have matches
+*   (put this
+*          functionality in another function that you call from this one)
 */
 let matches = 0;
 function match(openCards){
+
+  //if the cards do match, add 1 to matches and lock the cards in the open position
   if(openCards.length > 1 && openCards[0] === openCards[1]){
     matches += 1;
+    // for all de cards check de open ones and change them to match
     for(let i = 0; i < gameCards.length; i++){
       if(gameCards[i].classList.contains("open")){
         gameCards[i].classList.remove("open", "show");
@@ -109,64 +151,67 @@ function match(openCards){
     }
   }
   return matches;
-}
+};
 
-/*
- *    + if the cards do not match, remove the cards from the list and hide the
-      card's symbol (put this functionality in another function that you call
-      from this one)
+
+
+/**
+* @description if the cards do not match, remove the cards from the list and hide the
+*  card's symbol
+* @param {array} openCards - list of recent open Cards
 */
 function noMatch(openCards){
   if(openCards.length > 1 && openCards[0] !== openCards[1]){
     openCards = [];
+
+    // for all the cards check de open ones and add class nomatch
     for(let i = 0; i < gameCards.length; i++){
       if(gameCards[i].classList.contains("open")){
         gameCards[i].classList.add("nomatch");
+
+        // give a time for the nomatch animation and hide the cards symbol
         const time = setTimeout(function removeCards(){
           gameCards[i].classList.remove("open", "show", "nomatch")
         }, 1000);
       }
     }
   }
-}
-
-/*
-/*
-*  - add the card to a *list* of "open" cards (put this functionality in another
-    function that you call from this one)
-*/
-let openCards = [];
-function listOfOpenCards(iconfa){
-  if(openCards.length === 2){
-    openCards = [];
-  }
-  icon = iconfa.slice(13, -6);
-  openCards.push(icon);
-  return openCards;
 };
 
-/*
-*    + increment the move counter and display it on the page (put this functionality
-      in another function that you call from this one)
+
+
+/**
+* @description increment the move counter and display it on the page
++ @returns {number} counter - move counter
 */
 let counter = 0;
 function moveCounter(){
   counter += 1;
+
+  // display de counter value in the page
   const moves = document.querySelector('.moves');
   moves.innerText = counter;
   return counter;
 };
-/*
-*   decrement the stars in function of move counter
+
+
+
+/**
+* @description decrement the stars in function of move counter
+* @param {number} counter - move counter
++ @returns {number} stars - number of final stars
 */
 let stars = 3;
 function showStars(counter){
+
+  // when the movements reach 22 a star is decremented and its symbol is changed
   if(counter === 22){
     const thirdStar = document.getElementById('third-star');
     thirdStar.classList.remove("fa-star");
     thirdStar.classList.add("fa-star-o");
     stars -= 1;
   }
+  // when the movements reach 32 a star is decremented and its symbol is changed
   if(counter === 32){
     const secondStar = document.getElementById('second-star');
     secondStar.classList.remove("fa-star");
@@ -174,16 +219,20 @@ function showStars(counter){
     stars -= 1;
   }
   return stars;
-}
+};
 
-/*
- *    + if all cards have matched, display a message with the final score (put
-      this functionality in another function that you call from this one)
+
+
+/**
+* @description if all cards have matched, display a message with the final score
  */
-
 function finalMessage(){
   if(matches === 8){
+
+    // give a time for final match animation
     const message = setTimeout(function(){
+
+      // display final message, moves and stars
       const modal = document.getElementById('modal');
       modal.classList.remove("hidden");
       const move = document.getElementById('moves');
@@ -191,6 +240,7 @@ function finalMessage(){
       const star = document.getElementById('stars');
       star.innerText = stars;
 
+      // shows final time after retrieving it from the score-panel
       const minutes = document.getElementById('minutes');
       timeMinutes = minutes.innerText;
       const finalMinutes = document.getElementById('finalMinutes');
@@ -204,29 +254,34 @@ function finalMessage(){
   }
 };
 
-/*
-* restart the game  and play again.
-*/
 
+
+/**
+* @description restart the game  and play again reloading de page
+*/
 function reloaded(){
   window.location.reload(true);
-}
+};
 
+
+
+// ***** START OF THE GAME *****/
 newGame(cards);
 startTime();
 
-/*
- *  ****** set up the event listener for a card. If a card is clicked: ******
- *  - display the card's symbol (put this functionality in another function
-      that you call from this one)
-*/
+
+//  set up the event listener for all cards. If a card is clicked display the card
 
 const gameCards = document.getElementsByClassName('card');
 
 for(let i = 0; i < gameCards.length; i++){
   gameCards[i].addEventListener('click', function displayCardSymbol(){
     gameCards[i].classList.add("open", "show");
+
+    // retrieve the content of the card
     const iconfa = gameCards[i].innerHTML;
+
+
     listOfOpenCards(iconfa);
     match(openCards);
     noMatch(openCards);
@@ -234,12 +289,12 @@ for(let i = 0; i < gameCards.length; i++){
     finalMessage();
 
   });
-
+  // set up the event listener for move counter
   gameCards[i].addEventListener('click', moveCounter);
 
 }
 
-
+// set up de event listeners for restart and play again
 const reload = document.querySelector('.restart');
 reload.addEventListener('click', reloaded);
 

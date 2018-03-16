@@ -65,6 +65,10 @@ body {
     visibility: hidden;
 }
 
+/*
+ * Styles for the container
+ */
+
 .container {
     display: flex;
     justify-content: center;
