@@ -40,7 +40,9 @@ The game ends once all cards have been correctly matched.
 ## External Dependencies:
 
 **CSS files:**
+
 https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css
+
 https://fonts.googleapis.com/css?family=Coda
 
 font-awesome.min.css is used for the icons that fill each of the cards, 8 pairs of icons, as well as a couple more for the representation of stars as a way to score the game.
