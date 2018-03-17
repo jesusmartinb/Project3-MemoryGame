@@ -169,7 +169,7 @@ function noMatch(openCards){
 
         // give a time for the nomatch animation and hide the cards symbol
         const time = setTimeout(function removeCards(){
-          gameCards[i].classList.remove("open", "show", "nomatch")
+          gameCards[i].classList.remove("open", "show", "nomatch", "avoid-clicks")
         }, 1000);
       }
     }
@@ -274,7 +274,7 @@ const gameCards = document.getElementsByClassName('card');
 
 for(let i = 0; i < gameCards.length; i++){
   gameCards[i].addEventListener('click', function displayCardSymbol(){
-    gameCards[i].classList.add("open", "show");
+    gameCards[i].classList.add("open", "show", "avoid-clicks");
 
     // retrieve the content of the card
     const iconfa = gameCards[i].innerHTML;

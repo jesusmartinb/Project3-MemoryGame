@@ -151,6 +151,10 @@ h1 {
     animation: match 0.4s ease;
 }
 
+.avoid-clicks {
+    pointer-events: none;
+}
+
 @keyframes nomatch {
   0% {
     transform: skew(0deg,0deg);
