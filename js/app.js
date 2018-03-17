@@ -71,13 +71,14 @@ function newGame(cards){
 /**
 * @description Implementation of the chronometer
 */
+let cronometer;
 function startTime(){
   let seconds = 0;
   sec = document.getElementById('seconds');
   min = document.getElementById('minutes');
 
   // every 1000ms adds a second
-  let cronometer = setInterval(function(){
+  cronometer = setInterval(function(){
     seconds++;
 
     // convert seconds into minutes and seconds
@@ -226,6 +227,9 @@ function showStars(counter){
  */
 function finalMessage(){
   if(matches === 8){
+
+    // stop chronometer
+    clearInterval(cronometer);
 
     // give a time for final match animation
     const message = setTimeout(function(){
