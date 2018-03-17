@@ -133,8 +133,6 @@ function listOfOpenCards(iconfa){
 * @description if the list openCards has two card, check to see if the two cards match
 * @param {array} openCards - list of recent open Cards
 * @return {number} matches - number of times a couple of cards have matches
-*   (put this
-*          functionality in another function that you call from this one)
 */
 let matches = 0;
 function match(openCards){
