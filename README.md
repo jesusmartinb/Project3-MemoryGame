@@ -1,6 +1,6 @@
 # Memory Game Project
 
-Project number 3 belonging to the Udacity Front-End Web Developer Nano Degree
+Project number 3 belonging to the Udacity Front-End Web Developer Challenge Scholarship.
 
 ## How The Game Works
 
